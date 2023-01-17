@@ -122,7 +122,7 @@ cat1.products.create!({
   As a defense mechanism the Swamp Root taste extremely sour.
   They rely on animal pollination to reproduce. To promote pollination, they produce a delicious nectar.",
   image: open_asset('plante_6.jpg'),
-  quantity: 82,
+  quantity: 0,
   price: 24.49
 })
 

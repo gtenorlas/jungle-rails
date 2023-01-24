@@ -42,6 +42,15 @@
             <li class="nav-item">
               <%= link_to 'About Us', about_index_path, class: "nav-link" %>
             </li>
+            <% if !current_user %>
+              <li class="nav-item">
+                <%= link_to 'Log In', login_path, class: "nav-link"  %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'Log Out', logout_path, class: "nav-link"  %>
+              </li>
+            <% end %>
           <%# </ul>
         </li> %>
       </ul>

@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'Validations' do
+    it "is valid" do
+      @product = Product.new
+      @category = Category.new
+      @category.name = 'Category Test'
+      @product.name = 'Product Test' 
+      @product.price_cents = 68000
+      @product.quantity = 13
+      @product.category = @category
+      expect(@product.valid?).to be true
+    end
+  end
 end

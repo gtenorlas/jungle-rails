@@ -50,5 +50,18 @@ RSpec.describe Product, type: :model do
       @product.valid? 
       expect(@product.errors[:quantity]).not_to include("can't be blank")
     end
+
+    #category attribute
+    it "category attribute presence" do
+      @product = Product.new
+      @product.category = nil #invalid
+      @product.valid?
+      expect(@product.errors[:category]).to include("can't be blank")
+
+      @category = Category.new
+      @product.category = @category #valid
+      @product.valid? 
+      expect(@product.errors[:category]).not_to include("can't be blank")
+    end
   end
 end

@@ -28,7 +28,7 @@ RSpec.describe Product, type: :model do
     end
 
     #price_cents attribute
-    it "price_cents presence" do
+    it "price_cents attribute presence" do
       @product = Product.new
       @product.price_cents = nil #invalid
       @product.valid?
@@ -37,6 +37,18 @@ RSpec.describe Product, type: :model do
       @product.price_cents = 0 #valid
       @product.valid? 
       expect(@product.errors[:price_cents]).not_to include("can't be blank")
+    end
+
+    #quantity attribute
+    it "quantity attribute presence" do
+      @product = Product.new
+      @product.quantity = nil #invalid
+      @product.valid?
+      expect(@product.errors[:quantity]).to include("can't be blank")
+  
+      @product.quantity = -5 #valid
+      @product.valid? 
+      expect(@product.errors[:quantity]).not_to include("can't be blank")
     end
   end
 end

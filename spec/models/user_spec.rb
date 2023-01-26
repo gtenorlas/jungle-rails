@@ -67,7 +67,44 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password_confirmation]).to be_present
     end
 
+    it 'email should be unique' do
+      user1 = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user1.save
     
+      user2 = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'EMAIL@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user2.save
+    
+      expect(user2.errors[:email].first).to eq('has already been taken')
+    end
+
+    it 'password should be at least 8 characters long' do
+      user = User.new(
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user.valid? 
+      expect(user.errors[:password]).not_to include("Password must be at least 8 characters")
+
+      user = User.new(
+        password: '1234567',
+        password_confirmation: '1234567'
+      )
+      user.valid? 
+      expect(user.errors[:password]).to include("Password must be at least 8 characters")
+    
+    end
   end
 
   describe '.authenticate_with_credentials' do

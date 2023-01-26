@@ -108,6 +108,21 @@ RSpec.describe User, type: :model do
   end
 
   describe '.authenticate_with_credentials' do
-    # examples for this class method here
+
+    it 'should pass with valid email and password' do
+      user = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user.save
+
+      user = User.authenticate_with_credentials('email@test.com', '12345678')
+      expect(user).not_to be(nil)
+    end
+
+
   end
 end

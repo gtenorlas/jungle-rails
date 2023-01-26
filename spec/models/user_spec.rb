@@ -53,6 +53,21 @@ RSpec.describe User, type: :model do
       user.valid? 
       expect(user.errors[:password]).not_to include("can't be blank")
     end
+
+    it "password and password_confirmation does not match" do
+      user = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345679'
+      )
+    
+      user.valid?
+      expect(user.errors[:password_confirmation]).to be_present
+    end
+
+    
   end
 
   describe '.authenticate_with_credentials' do

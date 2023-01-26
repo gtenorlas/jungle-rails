@@ -123,6 +123,32 @@ RSpec.describe User, type: :model do
       expect(user).not_to be(nil)
     end
 
+    it 'should not pass with invalid password' do
+      user = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user.save
 
+      user = User.authenticate_with_credentials('email@test.com', '1234567')
+      expect(user).to be(nil)
+    end
+
+    it 'should not pass with invalid email' do
+      user = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user.save
+
+      user = User.authenticate_with_credentials('mail@test.com', '12345678')
+      expect(user).to be(nil)
+    end
   end
 end

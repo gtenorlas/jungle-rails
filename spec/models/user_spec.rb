@@ -14,7 +14,15 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
-    
+    it "email attribute presence" do
+      user = User.new(email: nil) #invalid
+      expect(user).to be_invalid
+      expect(user.errors[:email]).to include("can't be blank")
+  
+      user.email = 'email@test.com' #valid
+      user.valid?
+      expect(user.errors[:email]).not_to include("can't be blank")
+    end
   end
 
   describe '.authenticate_with_credentials' do

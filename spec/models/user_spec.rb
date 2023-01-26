@@ -33,6 +33,16 @@ RSpec.describe User, type: :model do
       user.valid? 
       expect(user.errors[:first_name]).not_to include("can't be blank")
     end
+
+    it "last_name attribute presence" do
+      user = User.new(last_name: nil) #invalid
+      expect(user).to be_invalid
+      expect(user.errors[:last_name]).to include("can't be blank")
+  
+      user.last_name = 'd' #valid
+      user.valid? 
+      expect(user.errors[:last_name]).not_to include("can't be blank")
+    end
   end
 
   describe '.authenticate_with_credentials' do

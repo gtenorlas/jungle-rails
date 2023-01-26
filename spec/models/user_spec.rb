@@ -165,5 +165,18 @@ RSpec.describe User, type: :model do
       expect(user).not_to be(nil)
     end
 
+    it 'should pass with valid email with incorrect casing' do
+      user = User.new(
+        first_name: 'abc',
+        last_name: 'd',
+        email: 'email@test.com',
+        password: '12345678',
+        password_confirmation: '12345678'
+      )
+      user.save
+
+      user = User.authenticate_with_credentials('EMAIL@test.coM', '12345678')
+      expect(user).not_to be(nil)
+    end
   end
 end

@@ -23,6 +23,10 @@ Use Credit Card # 4111 1111 1111 1111 for testing success scenarios.
 
 More information in their docs: <https://stripe.com/docs/testing#cards>
 
+## Cypress Testing
+1. Run rails s -e test to start server in test environment
+2. bin/rails cypress:run to run cypress tests
+
 ## Dependencies
 
 - Rails 6.1 [Rails Guide](http://guides.rubyonrails.org/v6.1/)

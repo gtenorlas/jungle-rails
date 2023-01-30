@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
 
-  before_action :authorize
+  #before_action :authorize #to require to authenticate to view cart
 
   def show
   end
